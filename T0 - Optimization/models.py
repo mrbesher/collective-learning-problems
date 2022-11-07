@@ -101,7 +101,7 @@ class TextClassificationNN(nn.Module):
         return self.fc(embeddings)
 
 init_cifar_model = lambda: ConvNet(32, 32)
-init_mnist_model = lambda: ConvNet(28, 28)
+init_mnist_model = lambda: ConvNet(28, 28, in_channels=1)
 
 def init_imdb_model():
     vocab_len = dataset_features['imdb']['vocab_len']
