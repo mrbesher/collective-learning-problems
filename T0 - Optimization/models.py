@@ -92,7 +92,7 @@ class ConvNet(nn.Module):
 class TextClassificationNN(nn.Module):
     def __init__(self, vocab_size, embed_dim, num_class):
         super().__init__()
-        self.embedding = nn.EmbeddingBag(vocab_size, embed_dim, sparse=True)
+        self.embedding = nn.EmbeddingBag(vocab_size, embed_dim)
         self.fc = MyFC(embed_dim, num_class)
 
     def forward(self, x):
