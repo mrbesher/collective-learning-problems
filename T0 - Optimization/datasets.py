@@ -61,7 +61,7 @@ def collate_batch(batch, text_pipeline, label_pipeline):
 
 # Getters for text datasets
 # Reference: https://colab.research.google.com/drive/1WUy4G2SsoLelrZDkO2I0v9tHx9x27NJK?usp=sharing
-def get_imdb_data(batch_size=8):
+def get_imdb_data(batch_size=8, data_path='data'):
     train_iter, test_iter = text_datasets.IMDB()
 
     tokenizer = get_tokenizer('basic_english')
@@ -88,7 +88,7 @@ def get_imdb_data(batch_size=8):
 
     return train_dataloader, test_dataloader
 
-def get_agnews_data(batch_size=8):
+def get_agnews_data(batch_size=8, data_path='data'):
     train_iter, test_iter = text_datasets.IMDB()
 
     tokenizer = get_tokenizer('basic_english')
