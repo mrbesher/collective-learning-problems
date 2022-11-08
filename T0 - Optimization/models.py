@@ -1,26 +1,13 @@
+import json
+
 from torch import nn
 import torch.nn.functional as F
 
 from datasets import dataset_features
 
-dataset_hyperparams = {
-    'cifar': {
-        'epochs': 2,
-        'lr': 1e-3
-    },
-    'mnist': {
-        'epochs': 2,
-        'lr': 1e-3
-    },
-    'imdb': {
-        'epochs': 2,
-        'lr': 1e-3
-    },
-    'ag_news': {
-        'epochs': 2,
-        'lr': 1e-3
-    }
-}
+
+with open('hyperparams.json', 'r') as f:
+    dataset_hyperparams = json.load(f)
 
 class MyFC(nn.Module):
   def __init__(self, input_size, output_size, hidden_units=200, dropout_p=0.2):
@@ -102,6 +89,7 @@ class TextClassificationNN(nn.Module):
 
 init_cifar_model = lambda: ConvNet(32, 32)
 init_mnist_model = lambda: ConvNet(28, 28, in_channels=1)
+init_fashionmnist_model = lambda: ConvNet(28, 28, in_channels=1)
 
 def init_imdb_model():
     vocab_len = dataset_features['imdb']['vocab_len']
@@ -125,6 +113,7 @@ def init_agnews_model():
 model_initializers = {
     'cifar': init_cifar_model,
     'mnist': init_mnist_model,
+    'fashion_mnist': init_fashionmnist_model,
     'imdb': init_imdb_model,
     'ag_news': init_agnews_model
 }

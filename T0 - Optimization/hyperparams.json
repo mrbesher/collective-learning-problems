@@ -1,0 +1,18 @@
+{
+    "cifar": {
+        "epochs": 2,
+        "lr": 1e-3
+    },
+    "mnist": {
+        "epochs": 2,
+        "lr": 1e-3
+    },
+    "imdb": {
+        "epochs": 2,
+        "lr": 1e-3
+    },
+    "ag_news": {
+        "epochs": 2,
+        "lr": 1e-3
+    }
+}

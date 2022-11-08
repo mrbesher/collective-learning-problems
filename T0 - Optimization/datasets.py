@@ -117,20 +117,24 @@ def get_agnews_data(batch_size=8, data_path='data'):
 
 
 # Generic transform for all image datasets
-transformers = transforms.Compose([
+rgb_transformers = transforms.Compose([
     transforms.ToTensor(),
     transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5))])
+
+one_channel_transformers = transforms.Compose([
+    transforms.ToTensor(),
+    transforms.Normalize((0.5,), (0.5,))])
 
 
 def get_cifar_data(batch_size=128, data_path='data'):
     train_loader = DataLoader(
         vision_datasets.CIFAR10(data_path, train=True,
-                                download=True, transform=transformers),
+                                download=True, transform=rgb_transformers),
         batch_size=batch_size, shuffle=False)
 
     test_loader = DataLoader(
         vision_datasets.CIFAR10(data_path, train=False,
-                                transform=transformers),
+                                transform=rgb_transformers),
         batch_size=batch_size, shuffle=False)
 
     return train_loader, test_loader
@@ -139,11 +143,23 @@ def get_cifar_data(batch_size=128, data_path='data'):
 def get_mnist_data(batch_size=128, data_path='data'):
     train_loader = DataLoader(
         vision_datasets.MNIST(data_path, train=True,
-                              download=True, transform=transformers),
+                              download=True, transform=one_channel_transformers),
         batch_size=batch_size, shuffle=False)
 
     test_loader = DataLoader(
-        vision_datasets.MNIST(data_path, train=False, transform=transformers),
+        vision_datasets.MNIST(data_path, train=False, transform=one_channel_transformers),
+        batch_size=batch_size, shuffle=False)
+
+    return train_loader, test_loader
+
+def get_fashionmnist_data(batch_size=128, data_path='data'):
+    train_loader = DataLoader(
+        vision_datasets.FashionMNIST(data_path, train=True,
+                              download=True, transform=one_channel_transformers),
+        batch_size=batch_size, shuffle=False)
+
+    test_loader = DataLoader(
+        vision_datasets.FashionMNIST(data_path, train=False, transform=one_channel_transformers),
         batch_size=batch_size, shuffle=False)
 
     return train_loader, test_loader
@@ -153,6 +169,7 @@ def get_mnist_data(batch_size=128, data_path='data'):
 data_loading_functions = {
     'cifar': get_cifar_data,
     'mnist': get_mnist_data,
+    'fashion_mnist': get_fashionmnist_data,
     'imdb': get_imdb_data,
     'ag_news': get_agnews_data
 }
