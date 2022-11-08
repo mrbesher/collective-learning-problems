@@ -89,7 +89,7 @@ def get_imdb_data(batch_size=8, data_path='data'):
     return train_dataloader, test_dataloader
 
 def get_agnews_data(batch_size=8, data_path='data'):
-    train_iter, test_iter = text_datasets.IMDB()
+    train_iter, test_iter = text_datasets.AG_NEWS()
 
     tokenizer = get_tokenizer('basic_english')
     vocab = build_vocab_from_iterator(yield_tokens(

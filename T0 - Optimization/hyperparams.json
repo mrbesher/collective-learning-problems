@@ -1,18 +1,18 @@
 {
     "cifar": {
-        "epochs": 2,
+        "epochs": 60,
         "lr": 1e-3
     },
-    "mnist": {
-        "epochs": 2,
+    "fashion_mnist": {
+        "epochs": 60,
         "lr": 1e-3
     },
     "imdb": {
-        "epochs": 2,
+        "epochs": 60,
         "lr": 1e-3
     },
     "ag_news": {
-        "epochs": 2,
+        "epochs": 60,
         "lr": 1e-3
     }
 }
