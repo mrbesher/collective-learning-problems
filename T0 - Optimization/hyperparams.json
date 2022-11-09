@@ -1,18 +1,34 @@
 {
     "cifar": {
         "epochs": 60,
-        "lr": 1e-3
+        "lr": {
+            "SGD": 1e-3,
+            "SGDMomentum": 1e-3,
+            "Adam": 1e-3
+        }
     },
     "fashion_mnist": {
         "epochs": 60,
-        "lr": 1e-3
+        "lr": {
+            "SGD": 1e-3,
+            "SGDMomentum": 1e-3,
+            "Adam": 1e-3
+        }
     },
     "imdb": {
         "epochs": 60,
-        "lr": 1e-3
+        "lr": {
+            "SGD": 1e-1,
+            "SGDMomentum": 1e-1,
+            "Adam": 1e-2
+        }
     },
     "ag_news": {
         "epochs": 60,
-        "lr": 1e-3
+        "lr": {
+            "SGD": 1e-1,
+            "SGDMomentum": 1e-1,
+            "Adam": 1e-2
+        }
     }
 }

@@ -33,7 +33,7 @@ class TensorTuple():
 
 
 class TextDataLoader(DataLoader):
-    def __init__(self, data_iterator, n_items, batch_size=8, shuffle=False, collate_fn=None):
+    def __init__(self, data_iterator, n_items, batch_size=128, shuffle=False, collate_fn=None):
         super().__init__(data_iterator, batch_size=batch_size,
                          shuffle=shuffle, collate_fn=collate_fn)
         self.n_items = ceil(n_items / batch_size)
@@ -61,7 +61,7 @@ def collate_batch(batch, text_pipeline, label_pipeline):
 
 # Getters for text datasets
 # Reference: https://colab.research.google.com/drive/1WUy4G2SsoLelrZDkO2I0v9tHx9x27NJK?usp=sharing
-def get_imdb_data(batch_size=8, data_path='data'):
+def get_imdb_data(batch_size=128, data_path='data'):
     train_iter, test_iter = text_datasets.IMDB()
 
     tokenizer = get_tokenizer('basic_english')
@@ -81,14 +81,14 @@ def get_imdb_data(batch_size=8, data_path='data'):
     train_len = len([1 for _ in train_iter])
     test_len = len([1 for _ in test_iter])
 
-    train_dataloader = TextDataLoader(train_iter, train_len, batch_size=batch_size, shuffle=False,
+    train_dataloader = TextDataLoader(train_iter, train_len, batch_size=batch_size, shuffle=True,
                                         collate_fn=lambda b: collate_batch(b, text_pipeline, label_pipeline))
-    test_dataloader = TextDataLoader(train_iter, test_len, batch_size=batch_size, shuffle=False,
+    test_dataloader = TextDataLoader(test_iter, test_len, batch_size=batch_size, shuffle=False,
                                         collate_fn=lambda b: collate_batch(b, text_pipeline, label_pipeline))
 
     return train_dataloader, test_dataloader
 
-def get_agnews_data(batch_size=8, data_path='data'):
+def get_agnews_data(batch_size=128, data_path='data'):
     train_iter, test_iter = text_datasets.AG_NEWS()
 
     tokenizer = get_tokenizer('basic_english')
@@ -108,9 +108,9 @@ def get_agnews_data(batch_size=8, data_path='data'):
     train_len = len([1 for _ in train_iter])
     test_len = len([1 for _ in test_iter])
 
-    train_dataloader = TextDataLoader(train_iter, train_len, batch_size=batch_size, shuffle=False,
+    train_dataloader = TextDataLoader(train_iter, train_len, batch_size=batch_size, shuffle=True,
                                         collate_fn=lambda b: collate_batch(b, text_pipeline, label_pipeline))
-    test_dataloader = TextDataLoader(train_iter, test_len, batch_size=batch_size, shuffle=False,
+    test_dataloader = TextDataLoader(test_iter, test_len, batch_size=batch_size, shuffle=False,
                                         collate_fn=lambda b: collate_batch(b, text_pipeline, label_pipeline))
 
     return train_dataloader, test_dataloader
@@ -130,7 +130,7 @@ def get_cifar_data(batch_size=128, data_path='data'):
     train_loader = DataLoader(
         vision_datasets.CIFAR10(data_path, train=True,
                                 download=True, transform=rgb_transformers),
-        batch_size=batch_size, shuffle=False)
+        batch_size=batch_size, shuffle=True)
 
     test_loader = DataLoader(
         vision_datasets.CIFAR10(data_path, train=False,
@@ -144,7 +144,7 @@ def get_mnist_data(batch_size=128, data_path='data'):
     train_loader = DataLoader(
         vision_datasets.MNIST(data_path, train=True,
                               download=True, transform=one_channel_transformers),
-        batch_size=batch_size, shuffle=False)
+        batch_size=batch_size, shuffle=True)
 
     test_loader = DataLoader(
         vision_datasets.MNIST(data_path, train=False, transform=one_channel_transformers),
@@ -156,7 +156,7 @@ def get_fashionmnist_data(batch_size=128, data_path='data'):
     train_loader = DataLoader(
         vision_datasets.FashionMNIST(data_path, train=True,
                               download=True, transform=one_channel_transformers),
-        batch_size=batch_size, shuffle=False)
+        batch_size=batch_size, shuffle=True)
 
     test_loader = DataLoader(
         vision_datasets.FashionMNIST(data_path, train=False, transform=one_channel_transformers),

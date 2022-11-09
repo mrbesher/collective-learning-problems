@@ -98,7 +98,7 @@ def init_imdb_model():
     if (not vocab_len) or (not n_classes):
         raise Exception("Cannot get vocab len or # of classes. Initialize dataset first")
 
-    return TextClassificationNN(vocab_len, 32, n_classes)
+    return TextClassificationNN(vocab_len, 16, n_classes)
 
 def init_agnews_model():
     vocab_len = dataset_features['ag_news']['vocab_len']
@@ -107,7 +107,7 @@ def init_agnews_model():
     if (not vocab_len) or (not n_classes):
         raise Exception("Cannot get vocab len or # of classes. Initialize dataset first")
 
-    return TextClassificationNN(vocab_len, 32, n_classes)
+    return TextClassificationNN(vocab_len, 16, n_classes)
 
 
 model_initializers = {
