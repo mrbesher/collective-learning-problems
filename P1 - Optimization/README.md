@@ -1,5 +1,5 @@
 # Comparing Optimization Algorithms
-__Which algorithms?__ Adam, SGD, and SGD with momentum.
+__Which algorithms?__ Adam, SGD, and SGD with momentum.  
 __Optimizing what?__ Optimizing the weights of models to be fitted on 2 text and 2 image classification datasets.
 
 ## Datasets
@@ -33,7 +33,9 @@ In this section the "paths" followed by the model weights during optimization ar
 2. The saved weights are reduced to 100 dimensions using PCA (Jolliffe, [1986](https://doi.org/10.1007/978-1-4757-1904-8_7)).
 3. The transofmred weights (with 100 dimensions) are reduced to two dimensions using TSNE (Maaten et al., [2008](https://www.jmlr.org/papers/volume9/vandermaaten08a/vandermaaten08a.pdf)).
 
-The only hyperparameter that was experimented with is the learning rate of the model. The learning rate leading to path with the __minimum__ train loss among the other learning rates was chosen. This process was done for Adam optimizer and later for SGD only for the text datasets. The model trained on IMDB did not converge when using SGD or SGD with momentum.
+Five optimization processes were run for each model, dataset pair. The inital weights and the order of the data (batches and their content) seen during training are the same for all the optimizers.
+
+The only hyperparameter that was experimented with is the learning rate of the optimizer. The learning rate leading to path with the __minimum__ train loss among the other learning rates was chosen. This process was done for Adam optimizer and later for SGD only for the text datasets. The model trained on IMDB did not converge when using SGD or SGD with momentum.
 
 ### IMDB
 ![IMDB: Paths followed by the model during optimization](assets/path_imdb.svg)
@@ -54,3 +56,7 @@ The only hyperparameter that was experimented with is the learning rate of the m
 - The paths are more smooth when we add momentum to the optimization process. This is expected as the history of updates applied affect the current values of parameter update. Adam optimizer seems to zigzag in the text datasets when it is supposed to converge. I think that this may be avoided by using a scheduler to decrease the learning rate.
 
 - SGD and SGD with momentum seem to follow a closer path to each other than to Adam.
+
+## Reproduce
+To get the results shown here run the codes in the Jupyter notebook `main.ipynb` then visualize the results by running the codes in `visualization.ipynb`.
+Some hyperparameters can be changed from `hyperparams.json`.
